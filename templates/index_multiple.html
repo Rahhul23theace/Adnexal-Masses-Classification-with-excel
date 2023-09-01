@@ -1,0 +1,84 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prediction App</title>
+
+<style>
+
+body {
+display: flex;
+flex-direction: column;
+align-items: center;
+background-image: url('/static/images/CT.jpg');
+background-repeat: no-repeat;
+background-size: cover;
+color: #cdf2b6; /* Light text color */
+}
+
+h1 {
+color: #8a69e4; /* Different light color for h1 and h2 elements */
+}
+
+h2 {
+color: #e3a446; /* Different light color for h1 and h2 elements */
+}
+
+form {
+text-align: center;
+}
+
+label, input {
+color: #fbfbfb; /* Light text color for form elements */
+}
+
+input {
+color: black; /* Black text color for input fields */
+}
+
+input[type="submit"] {
+background-color: #4CAF50;
+border: none;
+color: white;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+
+<h1>CT Radiomics-Based Model for Classification of Adnexal Masses :</h1>
+<h2>Upload the Excel Sheet with Values of Selected Radiomics Features Extracted from PyRadiomics for Multiple Patients :</h2>
+<h2>Please ensure the Excel file contains the following features in the extract same order:</h2>
+<ul>
+  <li>original_firstorder_90Percentile</li>
+  <li>original_firstorder_Entropy</li>
+  <li>original_firstorder_Maximum</li>
+  <li>original_glcm_Correlation</li>
+  <li>original_glcm_Imc1</li>
+  <li>original_glszm_ZoneEntropy</li>
+  <li>log-sigma-1-0-mm-3D_firstorder_Mean</li>
+  <li>log-sigma-1-0-mm-3D_glrlm_RunEntropy</li>
+  <li>log-sigma-1-0-mm-3D_glrlm_RunLengthNonUniformityNormalized</li>
+  <li>log-sigma-1-0-mm-3D_glszm_ZoneEntropy</li>
+  <li>wavelet-LLH_firstorder_Mean</li>
+</ul>
+<form action="/predict" method="post" enctype="multipart/form-data">
+<label for="file">Excel file:</label>
+<input type="file" id="file" name="file" accept=".xls,.xlsx" required><br><br>
+<input type="submit" value="Predict">
+</form>
+</body>
+</html>

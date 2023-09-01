@@ -1,0 +1,109 @@
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prediction App</title>
+
+<style>
+
+body {
+display: flex;
+flex-direction: column;
+align-items: center;
+background-image: url('/static/images/CT.jpg');
+background-repeat: no-repeat;
+background-size: cover;
+color: #cdf2b6; /* Light text color */
+}
+
+h1 {
+color: #8a69e4; /* Different light color for h1 and h2 elements */
+}
+
+h2 {
+color: #e3a446; /* Different light color for h1 and h2 elements */
+}
+
+form {
+text-align: center;
+}
+
+label, input {
+color: #fbfbfb; /* Light text color for form elements */
+}
+
+input {
+color: black; /* Black text color for input fields */
+}
+
+input[type="submit"] {
+background-color: #4CAF50;
+border: none;
+color: white;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+cursor: pointer;
+}
+
+</style>
+<script>
+function handlePaste(e) {
+let pastedData = e.clipboardData.getData('text');
+let values = pastedData.split(/\s+|,|;|\n/);
+let inputElements = document.getElementsByClassName('feature-input');
+for (let i = 0; i < inputElements.length && i < values.length; i++) {
+inputElements[i].value = parseFloat(values[i]);
+
+}
+
+}
+
+</script>
+</head>
+<body>
+
+<h1>CT Radiomics-Based Model for Classification of Adnexal Masses :</h1>
+<h2>Enter the Values of Selected Radiomics Features Extracted from PyRadiomics :</h2>
+<form action="/predict" method="post">
+<label for="original_firstorder_90Percentile">original_firstorder_90Percentile</label>
+<input type="number" step="0.00001" id="original_firstorder_90Percentile" name="original_firstorder_90Percentile" required><br><br>
+<label for="original_firstorder_Entropy">original_firstorder_Entropy</label>
+<input type="number" step="0.00001" id="original_firstorder_Entropy" name="original_firstorder_Entropy" required><br><br>
+<label for="original_firstorder_Maximum">original_firstorder_Maximum</label>
+<input type="number" step="0.00001" id="original_firstorder_Maximum" name="original_firstorder_Maximum" required><br><br>
+<label for="original_glcm_Correlation">original_glcm_Correlation</label>
+<input type="number" step="0.00001" id="original_glcm_Correlation" name="original_glcm_Correlation" required><br><br>
+<label for="original_glcm_Imc1">original_glcm_Imc1</label>
+<input type="number" step="0.00001" id="original_glcm_Imc1" name="original_glcm_Imc1" required><br><br>
+<label for="original_glszm_ZoneEntropy">original_glszm_ZoneEntropy</label>
+<input type="number" step="0.00001" id="original_glszm_ZoneEntropy" name="original_glszm_ZoneEntropy" required><br><br>
+<label for="log-sigma-1-0-mm-3D_firstorder_Mean">log-sigma-1-0-mm-3D_firstorder_Mean</label>
+<input type="number" step="0.00001" id="log-sigma-1-0-mm-3D_firstorder_Mean" name="log-sigma-1-0-mm-3D_firstorder_Mean" required><br><br>
+<label for="log-sigma-1-0-mm-3D_glrlm_RunEntropy">log-sigma-1-0-mm-3D_glrlm_RunEntropy</label>
+<input type="number" step="0.00001" id="log-sigma-1-0-mm-3D_glrlm_RunEntropy" name="log-sigma-1-0-mm-3D_glrlm_RunEntropy" required><br><br>
+<label for="log-sigma-1-0-mm-3D_glrlm_RunLengthNonUniformityNormalized">log-sigma-1-0-mm-3D_glrlm_RunLengthNonUniformityNormalized</label>
+<input type="number" step="0.00001" id="log-sigma-1-0-mm-3D_glrlm_RunLengthNonUniformityNormalized" name="log-sigma-1-0-mm-3D_glrlm_RunLengthNonUniformityNormalized" required><br><br>
+<label for="log-sigma-1-0-mm-3D_glszm_ZoneEntropy">log-sigma-1-0-mm-3D_glszm_ZoneEntropy</label>
+<input type="number" step="0.00001" id="log-sigma-1-0-mm-3D_glszm_ZoneEntropy" name="log-sigma-1-0-mm-3D_glszm_ZoneEntropy" required><br><br>
+<label for="wavelet-LLH_firstorder_Mean">wavelet-LLH_firstorder_Mean</label>
+<input type="number" step="0.00001" id="wavelet-LLH_firstorder_Mean" name="wavelet-LLH_firstorder_Mean" required><br><br>
+<input type="submit" value="Predict">
+
+</form>
+{% if prediction_text %}
+<h3>{{ prediction_text }}</h3>
+{% endif %}
+</body>
+</html>
